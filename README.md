@@ -5,4 +5,4 @@ Just login to your twitter account in your web browser and go to the tab (Tweets
 
 Time taken to delete your tweets will depend on the volume of your tweets.
 
-You can also save the JS file as a bookmark and just run it with a click.
+You can also save the JS code as a bookmark and just run it with a click.
