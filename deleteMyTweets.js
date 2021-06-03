@@ -34,7 +34,7 @@ var delTweets = function () {
 				}), 1000);
 			}
 			else {
-				document.body.click()
+				document.body.click();
 			}
 		});
 	});
