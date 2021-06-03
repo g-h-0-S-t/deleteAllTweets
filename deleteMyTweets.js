@@ -40,7 +40,7 @@ var delTweets = function () {
 			}
 		});
 	});
-	setTimeout(delTweets, 5000);
+	setTimeout(delTweets, 0);
 }
 
 delTweets();
