@@ -23,6 +23,8 @@
  * SOFTWARE. */
 
 var delTweets = function () {
+	var tweetsRemaining = document.getElementsByClassName('css-901oao css-bfa6kz r-9ilb82 r-1qd0xha r-n6v787 r-16dba41 r-1cwl3u0 r-bcqeeo r-qvutc0')[0].textContent;
+	console.log('Remaining: ', tweetsRemaining);
 	window.scrollBy(0, 10000);
 	document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
 		v.click();
@@ -31,8 +33,6 @@ var delTweets = function () {
 				v2.click();
 				document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
 					v3.click();
-					var tweetsRemaining = document.getElementsByClassName('css-901oao css-bfa6kz r-9ilb82 r-1qd0xha r-n6v787 r-16dba41 r-1cwl3u0 r-bcqeeo r-qvutc0')[0].textContent;
-					console.log('Remaining: ', tweetsRemaining);
 				});
 			}
 			else {
