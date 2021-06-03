@@ -5,7 +5,9 @@ var delTweets = function () {
 		document.querySelectorAll('span').forEach(function (v2, i2, a2) {
 			if (v2.textContent === 'Delete') {
 				v2.click();
-				setTimeout(document.querySelector('[data-testid="confirmationSheetConfirm"]').click(), 1000);
+				setTimeout(document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
+					v3.click();
+				}), 1000);
 			}
 			else {
 				document.body.click()
