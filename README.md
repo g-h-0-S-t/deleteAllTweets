@@ -6,3 +6,5 @@ Just login to your twitter account in your web browser and go to the tab (Tweets
 Time taken to delete your tweets will depend on the volume of your tweets.
 
 You can also save the JS code as a bookmark and just run it with a click.
+
+**FYI : Few tweets will remain in the Twitter Server and may not be visible in the Twitter UI after deleting first few thousands of tweets. To delete them, run this tool again after few days.**
