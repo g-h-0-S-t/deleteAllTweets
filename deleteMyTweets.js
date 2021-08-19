@@ -23,7 +23,7 @@
  * SOFTWARE. */
 
 var delTweets = function () {
-	var tweetsRemaining = document.getElementsByClassName('css-901oao css-bfa6kz r-9ilb82 r-37j5jr r-n6v787 r-16dba41 r-1cwl3u0 r-bcqeeo r-qvutc0')[0].textContent;
+	var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
 	console.log('Remaining: ', tweetsRemaining);
 	window.scrollBy(0, 10000);
 	document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
