@@ -22,20 +22,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. */
 
-(function () {
-    document.querySelector('.v1Nh3.kIKUG._bz0w > a').click();
-    var likeAndNext = function () {
-        if (document.querySelector('[aria-label="Like"]') && document.querySelector('[aria-label="Like"]').parentNode && document.querySelector('[aria-label="Like"]').parentNode.parentNode && document.querySelector('[aria-label="Like"]').parentNode.parentNode.parentNode && document.querySelector('[aria-label="Like"]').parentNode.parentNode.parentNode.className === 'fr66n') {
-            document.querySelector('[aria-label="Like"]').parentNode.parentNode.click();
-        }
-        setTimeout(function () {
-            if (document.querySelector('.coreSpriteRightPaginationArrow')) {
-                document.querySelector('.coreSpriteRightPaginationArrow').click();
-            }
-            else {
-                window.location.reload(true);
-            }
-        }, 1000)
-    };
-    setInterval(likeAndNext, 3000);
-})();
+var delTweets = function () {
+	var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
+	console.log('Remaining: ', tweetsRemaining);
+	window.scrollBy(0, 10000);
+	document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
+		v.click();
+		document.querySelectorAll('span').forEach(function (v2, i2, a2) {
+			if (v2.textContent === 'Delete') {
+				v2.click();
+				document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
+					v3.click();
+				});
+			}
+			else {
+				document.body.click();
+			}
+		});
+	});
+	setTimeout(delTweets, 0);
+}
+
+delTweets();
