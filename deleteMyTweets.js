@@ -25,25 +25,53 @@ javascript:
  * SOFTWARE. */
 
 (function () {
-    var delTweets = function () {
-        var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
-        console.log('Remaining: ', tweetsRemaining);
-        window.scrollBy(0, 10000);
-        document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
-            v.click();
-            document.querySelectorAll('span').forEach(function (v2, i2, a2) {
-                if (v2.textContent === 'Delete') {
-                    v2.click();
-                    document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
-                        v3.click();
-                    });
-                }
-                else {
-                    document.body.click();
-                }
-            });
-        });
-        setTimeout(delTweets, 0);
+    const delTweets = function () {
+        // Scroll the page down to load more tweets
+        console.log("Scrolling...");
+        window.scrollBy(0, 1000);  // Scroll by smaller increments to allow better loading
+
+        setTimeout(() => {
+            // Select the first "More" button using the updated selector
+            const moreButton = document.querySelector('button[aria-label="More"][data-testid="caret"]');
+
+            if (moreButton) {
+                console.log("Clicking 'More' button...");
+
+                moreButton.click();
+
+                setTimeout(() => {
+                    // Now, look for the "Delete" button after the "More" dropdown is opened
+                    const deleteButton = Array.from(document.querySelectorAll('span'))
+                        .find(span => span.textContent === 'Delete');
+
+                    if (deleteButton) {
+                        console.log("Clicking 'Delete' button...");
+
+                        deleteButton.click();
+
+                        setTimeout(() => {
+                            // After clicking delete, find the confirmation button and confirm the deletion
+                            const confirmButton = document.querySelector('[data-testid="confirmationSheetConfirm"]');
+
+                            if (confirmButton) {
+                                console.log("Confirming tweet deletion...");
+                                confirmButton.click();
+                            } else {
+                                console.log("Confirmation button not found.");
+                            }
+                        }, 300);  // Reduced delay for confirmation modal appearance
+                    } else {
+                        console.log("Delete button not found.");
+                        document.body.click();  // Close the dropdown if Delete button is not present
+                    }
+                }, 300);  // Reduced delay for the dropdown to appear
+            } else {
+                console.log("No 'More' button found, scrolling further.");
+            }
+
+            // Repeat the process after a shorter delay
+            setTimeout(delTweets, 1000);  // Reduced interval between attempts
+        }, 500);  // Reduced delay after scrolling to allow content to load
     };
 
     delTweets();
