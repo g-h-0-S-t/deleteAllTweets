@@ -26,12 +26,12 @@ javascript:
 
 (function () {
     const delTweets = function () {
-        // Scroll the page down to load more tweets
+        /** Scroll the page down to load more tweets */
         console.log("Scrolling...");
-        window.scrollBy(0, 1000);  // Scroll by smaller increments to allow better loading
+        window.scrollBy(0, 1000);  /** Scroll by smaller increments to allow better loading */
 
         setTimeout(() => {
-            // Select the first "More" button using the updated selector
+            /** Select the first "More" button using the updated selector */
             const moreButton = document.querySelector('button[aria-label="More"][data-testid="caret"]');
 
             if (moreButton) {
@@ -40,7 +40,7 @@ javascript:
                 moreButton.click();
 
                 setTimeout(() => {
-                    // Now, look for the "Delete" button after the "More" dropdown is opened
+                    /** Now, look for the "Delete" button after the "More" dropdown is opened */
                     const deleteButton = Array.from(document.querySelectorAll('span'))
                         .find(span => span.textContent === 'Delete');
 
@@ -50,7 +50,7 @@ javascript:
                         deleteButton.click();
 
                         setTimeout(() => {
-                            // After clicking delete, find the confirmation button and confirm the deletion
+                            /** After clicking delete, find the confirmation button and confirm the deletion */
                             const confirmButton = document.querySelector('[data-testid="confirmationSheetConfirm"]');
 
                             if (confirmButton) {
@@ -59,19 +59,19 @@ javascript:
                             } else {
                                 console.log("Confirmation button not found.");
                             }
-                        }, 300);  // Reduced delay for confirmation modal appearance
+                        }, 300);  /** Reduced delay for confirmation modal appearance */
                     } else {
                         console.log("Delete button not found.");
-                        document.body.click();  // Close the dropdown if Delete button is not present
+                        document.body.click();  /** Close the dropdown if Delete button is not present */
                     }
-                }, 300);  // Reduced delay for the dropdown to appear
+                }, 300);  /** Reduced delay for the dropdown to appear */
             } else {
                 console.log("No 'More' button found, scrolling further.");
             }
 
-            // Repeat the process after a shorter delay
-            setTimeout(delTweets, 1000);  // Reduced interval between attempts
-        }, 500);  // Reduced delay after scrolling to allow content to load
+            /** Repeat the process after a shorter delay */
+            setTimeout(delTweets, 1000);  /** Reduced interval between attempts */
+        }, 500);  /** Reduced delay after scrolling to allow content to load */
     };
 
     delTweets();
