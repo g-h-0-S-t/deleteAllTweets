@@ -24,55 +24,18 @@ javascript:
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. */
 
-(function () {
-    const delTweets = function () {
-        /** Scroll the page down to load more tweets */
-        console.log("Scrolling...");
-        window.scrollBy(0, 1000);  /** Scroll by smaller increments to allow better loading */
-
-        setTimeout(() => {
-            /** Select the first "More" button using the updated selector */
-            const moreButton = document.querySelector('button[aria-label="More"][data-testid="caret"]');
-
-            if (moreButton) {
-                console.log("Clicking 'More' button...");
-
-                moreButton.click();
-
-                setTimeout(() => {
-                    /** Now, look for the "Delete" button after the "More" dropdown is opened */
-                    const deleteButton = Array.from(document.querySelectorAll('span'))
-                        .find(span => span.textContent === 'Delete');
-
-                    if (deleteButton) {
-                        console.log("Clicking 'Delete' button...");
-
-                        deleteButton.click();
-
-                        setTimeout(() => {
-                            /** After clicking delete, find the confirmation button and confirm the deletion */
-                            const confirmButton = document.querySelector('[data-testid="confirmationSheetConfirm"]');
-
-                            if (confirmButton) {
-                                console.log("Confirming tweet deletion...");
-                                confirmButton.click();
-                            } else {
-                                console.log("Confirmation button not found.");
-                            }
-                        }, 300);  /** Reduced delay for confirmation modal appearance */
-                    } else {
-                        console.log("Delete button not found.");
-                        document.body.click();  /** Close the dropdown if Delete button is not present */
-                    }
-                }, 300);  /** Reduced delay for the dropdown to appear */
-            } else {
-                console.log("No 'More' button found, scrolling further.");
-            }
-
-            /** Repeat the process after a shorter delay */
-            setTimeout(delTweets, 1000);  /** Reduced interval between attempts */
-        }, 500);  /** Reduced delay after scrolling to allow content to load */
-    };
-
-    delTweets();
+(() => {
+  const scrollAndDelete = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    document.querySelectorAll('[aria-haspopup="menu"][aria-label="More"]').forEach(menu => {
+      menu.click();
+      setTimeout(() => {
+        document.querySelectorAll('span').forEach(span => {
+          if (span.textContent.trim().toLowerCase() === 'delete') span.click();
+        });
+      }, 250);
+    });
+    setTimeout(scrollAndDelete, 300);
+  };
+  scrollAndDelete();
 })();
